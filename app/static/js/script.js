@@ -1,29 +1,36 @@
-console.log('global scope');
 // create local scope
 (function(){
+  'use strict'
   // initialise app
-  var app = {
-    init: (function(){
-      console.log('local scope');
-    }),
-    // property
-    rootElement: document.body
-  };
+  const app = {
+    init: function(){
+      // global app stuff
+      routes.init()
+    }
+  }
 
   // handle routes and states
-  var routes = {
-    init:(function(){
+  const routes = {
+    init: function(){
+      // what's in the hash
+      var route = window.location.hash
+      route != '' ? sections.toggle(route) : window.location.hash = '#start-scherm'
 
-    })
+      window.addEventListener("hashchange", function(event) {
+        route = window.location.hash
+        sections.toggle(route)
+      })
+    }
   }
 
   // render & toggle sections
-  var sections = {
-    toggle:(function(route){
-
-    })
-  }
+  const sections = {
+    toggle: function(route) {
+      // show active route
+      console.log(route);
+      }
+    }
 
   // start the application
-  app.init();
-})();
+  app.init()
+})()
