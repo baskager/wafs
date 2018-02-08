@@ -1,36 +1,72 @@
-// create local scope
+/**
+ * (function(){})(); - An object oriented single page application that shows the different pages on click.
+ * @return {app.init} - This will initialise the app on the page.
+ */
+
 (function(){
   'use strict'
-  // initialise app
   const app = {
     init: function(){
-      // global app stuff
-      routes.init()
+      router.init()
     }
   }
 
-  // handle routes and states
-  const routes = {
+  const router = {
+
+    /**
+     * init - function that checks if the hash is empty if so it needs to show the #start page.
+     * Toggeling should happen on every click 
+     */
     init: function(){
-      // what's in the hash
-      var route = window.location.hash
-      route != '' ? sections.toggle(route) : window.location.hash = '#start-scherm'
-
-      window.addEventListener("hashchange", function(event) {
-        route = window.location.hash
-        sections.toggle(route)
-      })
-    }
-  }
-
-  // render & toggle sections
-  const sections = {
-    toggle: function(route) {
-      // show active route
-      console.log(route);
+			if (window.location.hash === '') {
+        window.location.hash = '#start';
       }
-    }
 
-  // start the application
+      sections.toggle(window.location.hash);
+
+      window.addEventListener('hashchange', function(event) {
+        sections.toggle(window.location.hash)
+      });
+    }
+  };
+
+  /**
+   * Toggeling sections on show and hidden.
+   * {Object} sections
+   * {method} sections.toggle
+   * {method} sections.hideElements
+   * {method} sections.showElement
+   */
+  const sections = {
+   /**
+    * Disable all sections, enable the one with the ID passed
+    * @memberof sections
+    * @param {String} id The ID of the element to enable
+    */
+   toggle: function(id) {
+     this.hideElements('section');
+     this.showElement(id);
+   },
+
+   /**
+    * Hide the elements by applying the hidden class.
+    * @param {String} selector The CSS Selector of the elements ot hide
+    */
+   hideElements: function(selector) {
+     document.querySelectorAll(selector).forEach(function(element) {
+       element.classList.add('hidden');
+     });
+   },
+
+   /**
+    * Show the element by removing the hidden class
+    * @param {String} selector The CSS Selector of the element to show
+    */
+   showElement: function(selector) {
+     document.querySelector(selector).classList.remove('hidden');
+   }
+ };
+
+  // method that starts the application
   app.init()
 })()
