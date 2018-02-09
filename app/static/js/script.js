@@ -12,10 +12,9 @@
   };
 
   const router = {
-
     /**
      * init - function that checks if the hash is empty if so it needs to show the #start page.
-     * Toggeling should happen on every click 
+     * Toggeling should happen on every click
      */
     init: function(){
        if (window.location.hash === '') {
