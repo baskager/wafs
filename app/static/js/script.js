@@ -4,12 +4,12 @@
  */
 
 (function(){
-  'use strict'
+  'use strict';
   const app = {
     init: function(){
-      router.init()
+      router.init();
     }
-  }
+  };
 
   const router = {
 
@@ -18,14 +18,14 @@
      * Toggeling should happen on every click 
      */
     init: function(){
-			if (window.location.hash === '') {
+       if (window.location.hash === '') {
         window.location.hash = '#start';
+      } else {
+        sections.toggle(window.location.hash);
       }
 
-      sections.toggle(window.location.hash);
-
-      window.addEventListener('hashchange', function(event) {
-        sections.toggle(window.location.hash)
+      window.addEventListener('hashchange', function click(event) {
+        sections.toggle(window.location.hash);
       });
     }
   };
@@ -68,5 +68,5 @@
  };
 
   // method that starts the application
-  app.init()
-})()
+  app.init();
+})();
