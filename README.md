@@ -49,16 +49,14 @@ Dit is gelukt, je kijkt er naar :)
 
 ## Bestaande code ombouwen naar een object structuur (Minmaal Object Literal Pattern & IIFE)
 
-Woensdag - Bekijk de issues voor de voortgang van deze opdracht
+Te vinden in:  [/cmd-geo-script/script.js](https://github.com/baskager/wafs/blob/master/cmd-geo-script/script.js)
 
 ## Basis structuur voor single page web app opzetten
 
-Vrijdag - Bekijk de issues voor de voortgang van deze opdracht
+Te vinden in:  [/app/](https://github.com/baskager/wafs/tree/master/app)
 
 ## Code review
+#### Pull requests
+**Stef: ** <https://github.com/vandijkstef/wafs/pull/1>
 
-Vrijdag - Bekijk de issues voor de voortgang van deze opdracht
-
-## Best practices
-
-...
+**Vincent: ** <https://github.com/VincentKempers/wafs/pull/6>
