@@ -1,10 +1,12 @@
 'use strict';
 
 { // Use ES6 IIFE
+
     const sections = {
-        toggle: route => {
-            console.log('Toggle in sections object fired');
-            console.log(route);
+        toggle: function(route) {
+            // Get data from rijksmuseum
+            collection.searchCollection(route);
+
             const sections = document.getElementsByClassName('basic-section');
             for (let i = 0; i < sections.length; i++) {
                 const sect = sections[i];
@@ -17,28 +19,20 @@
         }
     };
 
-    const routes = {
-        init: () => {
-            console.log('Init in routes object fired');
-
-            window.addEventListener('hashchange', () => {
-                const route = location.hash.substring(1);
-                sections.toggle(route);
-            });
-        }
-    };
-
     const collection = {
         searchCollection: function(query) {
             console.log('Fetching '+ query +' from Rijksmuseum');
             var request = new XMLHttpRequest();
-            request.open('GET', 'https://www.rijksmuseum.nl/api/nl/collection?key=ysKweoBD&format=json&q=' + query, true);
+            request.open('GET', 'https://www.rijksmuseum.nl/api/nl/collection?key=ysKweoBD&format=json&imgonly=true&q=' + query, true);
 
             request.onload = function() {
                 if (request.status >= 200 && request.status < 400) {
                     // Success!
+
                     var data = JSON.parse(request.responseText);
                     console.log(data.artObjects);
+
+                    document.getElementById(query).innerHTML = '<h2>'+ query +'</h2>';
 
                     for (let artObject of data.artObjects) {
                         document.getElementById(query).innerHTML +='<article id="'+ artObject.title +'"></article>';
@@ -61,12 +55,22 @@
         }
     };
 
+    routie('Rembrandt', function() {
+        sections.toggle('Rembrandt');
+    });
+
+    routie('Vermeer', function() {
+        console.log("hoi pipeloi")
+        sections.toggle('Vermeer');
+    });
+
     const app = {
         init: () => {
-            console.log('Init in app object fired');
-            routes.init();
+            document.addEventListener('DOMContentLoaded', function() {
+                sections.toggle('Rembrandt');
+            });
         }
     };
-    collection.searchCollection('Rembrandt');
+
     app.init();
 }
