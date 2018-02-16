@@ -1,6 +1,6 @@
 'use strict';
 
-{ // Use ES6 IIFE
+(function () {
 
     const sections = {
         toggle: function(route) {
@@ -10,8 +10,7 @@
             const sections = document.getElementsByClassName('basic-section');
 
             // Loop through the sections and apply the classes for hiding if needed
-            for (let i = 0; i < sections.length; i++) {
-                const sect = sections[i];
+            for (let sect of sections) {
                 if (sect.id !== route) {
                     sect.classList.add('hide');
                 } else {
@@ -73,7 +72,7 @@
 
     // APp initialiser object instance
     const app = {
-        init: () => {
+        init: function() {
             document.addEventListener('DOMContentLoaded', function() {
                 sections.toggle('Rembrandt');
             });
@@ -81,4 +80,4 @@
     };
     // Initialise app
     app.init();
-}
+})();
