@@ -1,9 +1,10 @@
 # Web app from scratch - assignments
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
 ## Notice
 CSS to the rescue had wat meer tijd dan verwacht dus ik ben wat vertraagd met dit vak
 
+## Live demo
+<https://baskager.github.io/wafs/app/index.html>
 
 ## GitHub repository opzetten voor het vak
 
