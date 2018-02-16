@@ -1,21 +1,25 @@
 /* Reset and initialise some values for the body */
 body {
   margin: 0;
-  /*Compensate with nav*/
-  padding: 3em 0 0; /* Top Right Bottom Left -> You can skip the Left if === Right */
+  font-family: 'Open Sans', sans-serif;
+}
+header {
+    background: black;
+    box-sizing: border-box;
+    overflow: auto;
+}
+header h1 {
+    color: white;
+    padding: 0.2em;
 }
 nav {
-  /* height: 3em; */
-  background: black;
   box-sizing: border-box;
-  /* position: fixed; */
-  /* overflow: hidden; */
   width: 100%;
-  position: top;
-  top: 0;
 }
 nav ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 nav a {
   display: block;
@@ -45,6 +49,19 @@ nav a {
 }
 .show-block {
   display: block;
+}
+.basic-section article {
+    display: flex;
+    border: 1px solid gray;
+    margin-bottom: 1em;
+}
+.basic-section article img {
+    height: 10em;
+    width: 10em;
+}
+.basic-section article h2 {
+    padding: 0.5em;
+    font-size: 1em;
 }
 ul {
   box-sizing: border-box;
