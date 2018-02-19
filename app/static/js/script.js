@@ -52,7 +52,7 @@ import Api from './js-api-connect/api.class.js';
     };
     // Route for paintings by Rembrandt
     routie('artist/:name', function(name) {
-        sections.toggle(name)
+        sections.toggle(name);
     });
 
     // APp initialiser object instance
