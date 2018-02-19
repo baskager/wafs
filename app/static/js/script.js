@@ -25,9 +25,12 @@ import Api from './js-api-connect/api.class.js';
     const collection = {
         searchCollection: function(query) {
             const api = new Api(apiConfig);
+            console.log(apiConfig);
             const endpoints = api.getEndpointsForApi('rijksmuseum');
             // Set 'query' parameter on the GET request to the collection endpoint
             endpoints.collection.GET.params.q = query;
+            // Indicate that we only want to search for top pieces in the collection
+            // endpoints.collection.GET.params.toppieces = true;
 
             // Perform a GET request on the 'collection' endpoint on the 'rijksmuseum' API
             api.request('rijksmuseum', endpoints.collection.GET).then(function(apiData) {
@@ -37,8 +40,8 @@ import Api from './js-api-connect/api.class.js';
 
                 // Loop through the API and insert articles for each painting
                 for (let artObject of apiData.artObjects) {
-                    document.getElementById(query).innerHTML +='<article id="'+ artObject.title +'"></article>';
-                    let article = document.getElementById(artObject.title);
+                    document.getElementById(query).innerHTML +='<article id="'+ artObject.id +'"></article>';
+                    let article = document.getElementById(artObject.id);
 
                     article.innerHTML +='<img src="'+artObject.webImage.url+'" alt="'+artObject.longTitle+'"/>';
                     article.innerHTML +='<h2>'+ artObject.longTitle +'</h2>';
