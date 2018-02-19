@@ -29,8 +29,6 @@ import Api from './js-api-connect/api.class.js';
             const endpoints = api.getEndpointsForApi('rijksmuseum');
             // Set 'query' parameter on the GET request to the collection endpoint
             endpoints.collection.GET.params.q = query;
-            // Indicate that we only want to search for top pieces in the collection
-            // endpoints.collection.GET.params.toppieces = true;
 
             // Perform a GET request on the 'collection' endpoint on the 'rijksmuseum' API
             api.request('rijksmuseum', endpoints.collection.GET).then(function(apiData) {
@@ -53,12 +51,8 @@ import Api from './js-api-connect/api.class.js';
         }
     };
     // Route for paintings by Rembrandt
-    routie('Rembrandt', function() {
-        sections.toggle('Rembrandt');
-    });
-    // Route for paintings by Vermeer
-    routie('Vermeer', function() {
-        sections.toggle('Vermeer');
+    routie('artist/:name', function(name) {
+        sections.toggle(name)
     });
 
     // APp initialiser object instance
