@@ -1,0 +1,3 @@
+[submodule "app/static/js/js-api-connect"]
+	path = app/static/js/js-api-connect
+	url = git@github.com:baskager/js-api-connect.git

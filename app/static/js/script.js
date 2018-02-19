@@ -1,6 +1,6 @@
 // 'use strict';
-import apiConfig from './api/config.js';
-import Api from './api/api.class.js';
+import apiConfig from './js-api-connect/config.js';
+import Api from './js-api-connect/api.class.js';
 
 (function () {
 
