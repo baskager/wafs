@@ -9,10 +9,10 @@ import Api from './js-api-connect/api.class.js';
             // Get data from rijksmuseum
             collection.searchCollection(route);
 
-            const sections = document.getElementsByClassName('basic-section');
+            const htmlSections = document.getElementsByClassName('basic-section');
 
             // Loop through the sections and apply the classes for hiding if needed
-            for (let sect of sections) {
+            for (let sect of htmlSections) {
                 if (sect.id !== route) {
                     sect.classList.add('hide');
                 } else {
