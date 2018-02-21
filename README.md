@@ -4,7 +4,8 @@
 CSS to the rescue had wat meer tijd dan verwacht dus ik ben wat vertraagd met dit vak
 
 ## Live demo
-<https://baskager.github.io/wafs/app/index.html>
+### Update: Ik heb liever geen API keys in mijn repo, wafs is verplaatst naar mijn eigen server :)
+<http://www.kager.io/wafs/app/>
 
 ## GitHub repository opzetten voor het vak
 
