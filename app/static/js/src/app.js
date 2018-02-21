@@ -14,10 +14,23 @@ import Collection from './rijksmuseum/Collection.class.js';
     const sections = {
         toggle: function(route) {
             // Get data from rijksmuseum
-            collection.search(route);
+            collection.search(route).then(function(artist){
+                console.log('artist', artist);
+                document.getElementById(artist.name).innerHTML = '<h2>'+ artist.name +'</h2>';
+
+                //Loop through the API and insert articles for each painting
+                for (let painting of artist.paintings) {
+                    document.getElementById(artist.name).innerHTML +='<article id="'+ painting.id +'"></article>';
+                    let article = document.getElementById(painting.id);
+
+                    article.innerHTML +='<img src="'+painting.imageUrl+'" alt="'+painting.longTitle+'"/>';
+                    article.innerHTML +='<h2>'+ painting.longTitle +'</h2>';
+                }
+            }).catch(function(err) {
+                console.log(err);
+            });
 
             const htmlSections = document.getElementsByClassName('basic-section');
-
             // Loop through the sections and apply the classes for hiding if needed
             for (let sect of htmlSections) {
                 if (sect.id !== route) {
@@ -33,16 +46,15 @@ import Collection from './rijksmuseum/Collection.class.js';
         sections.toggle(name);
     });
 
+    // Dynamic route to look up paintings by any artist
+    routie('', function() {
+        sections.toggle('Rembrandt');
+    });
+
     // APp initialiser object instance
     const app = {
         init: function() {
-
-            document.addEventListener('DOMContentLoaded', function() {
-                sections.toggle('Rembrandt');
-                setTimeout(function(){ sections.toggle('Rembrandt'); }, 5000);
-            });
-
-
+            console.log('initialised app');
         }
     };
     // Initialise app
