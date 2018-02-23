@@ -20,8 +20,6 @@ De nieuwste snufjes van Ecmascript 5 en Ecmascript 6 worden gebruikt. Zorg er in
 
 - Factory pattern. De ArtistFactory maakt Artist objecten aan vanuit de API of vanuit de lokale collectie.
 
-## Interaction diagram
-
 ## Class diagram
 ![preview image](http://www.kager.io/uploads/wafs-class-diagram.png)
 
