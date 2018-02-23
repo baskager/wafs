@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-      <meta charset="utf-8">
-      <title>Web app from scratch</title>
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
-  </head>
+<head>
+    <meta charset="utf-8">
+    <title>Web app from scratch</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
+    <script src='static/js/lib/handlebars.js'></script>
+    <script src='static/js/lib/routie.js'></script>
+    <script src='static/js/src/app.js' type="module"></script>
+</head>
 
-  <body>
-    <header>
-        <h1>Rijksmuseum collection browser</h1>
-      <nav>
-        <ul>
-          <li><a href="#artist/Rembrandt">Rembrandt</a></li>
-          <li><a href="#artist/Vermeer">Johannes Vermeer</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-        <section id="Rembrandt" class="basic-section best-practices hide">
+<body>
+    <!-- <script id="entry-template" type="text/x-handlebars-template"> -->
+        <header>
+            <h1>Rijksmuseum collection browser</h1>
+            <nav>
+                <ul>
+                    <li><a href="#artist/Rembrandt">Rembrandt</a></li>
+                    <li><a href="#artist/Vermeer">Johannes Vermeer</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="artist-section" class="basic-section best-practices">
 
-        </section>
-        <section id="Vermeer" class="basic-section hide">
-
-        </section>
-    </main>
-  </body>
-  <script src='static/js/lib/routie.js'></script>
-  <script src='static/js/src/app.js' type="module"></script>
+            </section>
+            <script id='section-template' type='text/x-handlebars-template'>
+                <h2>{{artist.name}}</h2>
+                <div class='article-grid'>
+                {{#each artist.paintings}}
+                    <article id='{{id}}'>
+                        <a href='#painting/{{id}}'>
+                            <img src='{{imageUrl}}' alt='{{longTitle}}' />
+                        </a>
+                    </article>
+                {{/each}}
+                </div>
+            </script>
+        </main>
+    <!-- </script> -->
+</body>
 
 </html>

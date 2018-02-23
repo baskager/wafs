@@ -13,32 +13,22 @@ import Collection from './rijksmuseum/Collection.class.js';
 
     const sections = {
         toggle: function(route) {
+            document.querySelector('#artist-section').innerHTML = 'loading...';
             // Get data from rijksmuseum
             collection.search(route).then(function(artist){
-                console.log('artist', artist);
-                document.getElementById(artist.name).innerHTML = '<h2>'+ artist.name +'</h2>';
+                document.querySelector('#artist-section').innerHTML = '';
 
-                //Loop through the API and insert articles for each painting
-                for (let painting of artist.paintings) {
-                    document.getElementById(artist.name).innerHTML +='<article id="'+ painting.id +'"></article>';
-                    let article = document.getElementById(painting.id);
+                var sectionTemplate = document.querySelector('#section-template').innerHTML;
+                var template = Handlebars.compile(sectionTemplate);
 
-                    article.innerHTML +='<img src="'+painting.imageUrl+'" alt="'+painting.longTitle+'"/>';
-                    article.innerHTML +='<h2>'+ painting.longTitle +'</h2>';
-                }
+                var data = template({
+                    artist: artist
+                });
+                document.querySelector('#artist-section').innerHTML += data;
+
             }).catch(function(err) {
                 console.log(err);
             });
-
-            const htmlSections = document.getElementsByClassName('basic-section');
-            // Loop through the sections and apply the classes for hiding if needed
-            for (let sect of htmlSections) {
-                if (sect.id !== route) {
-                    sect.classList.add('hide');
-                } else {
-                    sect.classList.remove('hide');
-                }
-            }
         }
     };
     // Dynamic route to look up paintings by any artist

@@ -6,8 +6,4 @@ export default class Painting {
         this.imageUrl = imageUrl;
     }
 
-    render() {
-
-    }
-
 }

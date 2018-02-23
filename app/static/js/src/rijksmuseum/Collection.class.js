@@ -8,7 +8,6 @@ export default class Collection {
     }
 
     addArtist(artist) {
-        console.log('adding artist to collection');
         this.artists.push(artist);
     }
 
