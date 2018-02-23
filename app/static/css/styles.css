@@ -22,6 +22,11 @@ body {
 .btn.back {
     width: 15em;
 }
+.error-monkey img {
+    width: 20em;
+    height: auto;
+    margin: 0 auto;
+}
 
 header {
     background: black;

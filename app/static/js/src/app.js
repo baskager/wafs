@@ -1,5 +1,5 @@
 // 'use strict';
-import Collection from './rijksmuseum/Collection.class.js';
+import ArtistFactory from './rijksmuseum/ArtistFactory.class.js';
 
 /**
 * Nifty little webapp that fetches paintings from the Rijksmuseum API
@@ -9,13 +9,14 @@ import Collection from './rijksmuseum/Collection.class.js';
 * @since   7-02-2018
 */
 (function () {
-    const collection = new Collection();
 
     const page = {
+        artistFactory: new ArtistFactory(),
         artistOverview: function(artistName) {
-            document.querySelector('#artist-section').innerHTML = 'loading paintings by '+ artistName +'...';
+            document.querySelector('#artist-section').innerHTML = '<img src="static/img/ajax-loader.gif"/><br/>';
+            document.querySelector('#artist-section').innerHTML += 'loading paintings by '+ artistName +'...';
             // Get data from rijksmuseum
-            collection.search(artistName).then(function(artist){
+            this.artistFactory.getArtist(artistName).then(function(artist){
                 document.querySelector('#artist-section').innerHTML = '';
 
                 let sectionTemplate = document.querySelector('#artist-overview').innerHTML;
@@ -27,20 +28,22 @@ import Collection from './rijksmuseum/Collection.class.js';
                 document.querySelector('#artist-section').innerHTML += data;
 
             }).catch(function(err) {
+                document.querySelector('#artist-section').innerHTML = '<div class="error-monkey"><img src="static/img/confused-monkey.png"/>';
+                document.querySelector('#artist-section').innerHTML += '<h1>Verbinding met het rijksmuseum is mislukt</h1>';
                 console.log(err);
             });
         },
         paintingDetail: function(artistName, id) {
-            document.querySelector('#artist-section').innerHTML = 'loading painting detail page...';
+            document.querySelector('#artist-section').innerHTML = '<img src="static/img/ajax-loader.gif"/><br/>';
+            document.querySelector('#artist-section').innerHTML += 'loading painting detail page...';
             // Get data from rijksmuseum
-            collection.search(artistName).then(function(artist){
+            this.artistFactory.getArtist(artistName).then(function(artist){
                 document.querySelector('#artist-section').innerHTML = '';
 
                 let sectionTemplate = document.querySelector('#painting-detail').innerHTML;
                 let template = Handlebars.compile(sectionTemplate);
 
                 let painting = artist.getPaintingById(id)[0];
-                console.log(painting);
 
                 var data = template({
                     artist: artist,
@@ -49,6 +52,8 @@ import Collection from './rijksmuseum/Collection.class.js';
                 document.querySelector('#artist-section').innerHTML += data;
 
             }).catch(function(err) {
+                document.querySelector('#artist-section').innerHTML = '<div class="error-monkey"><img src="static/img/confused-monkey.png"/>';
+                document.querySelector('#artist-section').innerHTML += '<h1>Verbinding met het rijksmuseum is mislukt</h1>';
                 console.log(err);
             });
         }
@@ -66,13 +71,4 @@ import Collection from './rijksmuseum/Collection.class.js';
     routie('', function() {
         page.artistOverview('Rembrandt');
     });
-
-    // APp initialiser object instance
-    const app = {
-        init: function() {
-            console.log('initialised app');
-        }
-    };
-    // Initialise app
-    app.init();
 })();

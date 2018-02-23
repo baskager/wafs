@@ -2,7 +2,7 @@ import apiConfig from '../../lib/js-api-connect/config.js';
 import Api from '../../lib/js-api-connect/Api.class.js';
 import Artist from './Artist.class.js';
 
-export default class Collection {
+export default class ArtistFactory {
     constructor(artists = []) {
         this.artists = artists;
     }
@@ -11,23 +11,23 @@ export default class Collection {
         this.artists.push(artist);
     }
 
-    getArtistFromCollection(query) {
-        return this.artists.filter(artist => artist.name === query);
+    getArtistFromCollection(name) {
+        return this.artists.filter(artist => artist.name === name);
     }
 
-    isArtistInCollection(query) {
-        return this.getArtistFromCollection(query).length > 0;
+    isArtistInCollection(name) {
+        return this.getArtistFromCollection(name).length > 0;
     }
-    search(query) {
+    getArtist(name) {
         const self = this;
         return new Promise(function(resolve, reject) {
             const api = new Api(apiConfig);
             const endpoints = api.getEndpointsForApi('rijksmuseum');
             // Set 'query' parameter on the GET request to the collection endpoint
-            endpoints.collection.GET.params.q = query;
+            endpoints.collection.GET.params.q = name;
 
-            if(self.isArtistInCollection(query) !== true) {
-                let artist = new Artist(query);
+            if(self.isArtistInCollection(name) !== true) {
+                let artist = new Artist(name);
                 /*
                 Take a look at this awesome strategy pattern :)
                 The third parameter of the 'request' method is optional,
@@ -49,17 +49,10 @@ export default class Collection {
                     reject(err);
                 });
             } else {
-                console.log('Painter ' + query + ' already in collection, no need for the api :)');
-                resolve(self.getArtistFromCollection(query)[0]);
+                console.log('Painter ' + name + ' already in collection, no need for the api :)');
+                resolve(self.getArtistFromCollection(name)[0]);
             }
         });
-
-        // const artist = this.isArtistInCollection(query);
-        // console.log(artist);
-
-
-        // Perform a GET request on the 'collection' endpoint on the 'rijksmuseum' API
-        // 'Strategy' design pattern GIMME POINTS FOR THIS PLS
     }
 
 }
