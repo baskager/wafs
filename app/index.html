@@ -23,20 +23,33 @@
             </nav>
         </header>
         <main>
-            <section id="artist-section" class="basic-section best-practices">
+            <section id="artist-section" class="basic-section">
 
             </section>
-            <script id='section-template' type='text/x-handlebars-template'>
+            <script id='artist-overview' type='text/x-handlebars-template'>
                 <h2>{{artist.name}}</h2>
                 <div class='article-grid'>
                 {{#each artist.paintings}}
                     <article id='{{id}}'>
-                        <a href='#painting/{{id}}'>
+                        <a href='#artist/{{../artist.name}}/painting/{{id}}'>
                             <img src='{{imageUrl}}' alt='{{longTitle}}' />
                         </a>
                     </article>
                 {{/each}}
                 </div>
+            </script>
+
+            <script id='painting-detail' type='text/x-handlebars-template'>
+                <div class='detail-grid'>
+                    <a class='btn back' href='#artist/{{artist.name}}'>< Paintings by {{artist.name}}</a>
+                    <h2>{{painting.longTitle}}</h2>
+                    <h3>{{painting.principalOrFirstMaker}}</h3>
+                    <div>
+                        <img src='{{painting.imageUrl}}' alt='{{longTitle}}' />
+                    </div>
+                    <a class='btn' href='{{painting.rijksMuseumUrl}}'>View this painting on the Rijksmuseum website</a>
+                </div>
+
             </script>
         </main>
     <!-- </script> -->

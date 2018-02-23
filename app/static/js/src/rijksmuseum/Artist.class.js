@@ -5,6 +5,10 @@ export default class Artist {
         this.paintings = [];
     }
 
+    getPaintingById(id) {
+        return this.paintings.filter(painting => painting.id === id);
+    }
+
     handleApiData(apiData) {
         // Loop through the API and insert articles for each painting
         for (let artObject of apiData.artObjects) {
@@ -12,7 +16,9 @@ export default class Artist {
                 artObject.id,
                 artObject.title,
                 artObject.longTitle,
-                artObject.webImage.url
+                artObject.webImage.url,
+                artObject.principalOrFirstMaker,
+                artObject.links.web
             ));
         }
     }

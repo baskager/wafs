@@ -11,18 +11,40 @@ import Collection from './rijksmuseum/Collection.class.js';
 (function () {
     const collection = new Collection();
 
-    const sections = {
-        toggle: function(route) {
-            document.querySelector('#artist-section').innerHTML = 'loading...';
+    const page = {
+        artistOverview: function(artistName) {
+            document.querySelector('#artist-section').innerHTML = 'loading paintings by '+ artistName +'...';
             // Get data from rijksmuseum
-            collection.search(route).then(function(artist){
+            collection.search(artistName).then(function(artist){
                 document.querySelector('#artist-section').innerHTML = '';
 
-                var sectionTemplate = document.querySelector('#section-template').innerHTML;
-                var template = Handlebars.compile(sectionTemplate);
+                let sectionTemplate = document.querySelector('#artist-overview').innerHTML;
+                let template = Handlebars.compile(sectionTemplate);
+
+                let data = template({
+                    artist: artist
+                });
+                document.querySelector('#artist-section').innerHTML += data;
+
+            }).catch(function(err) {
+                console.log(err);
+            });
+        },
+        paintingDetail: function(artistName, id) {
+            document.querySelector('#artist-section').innerHTML = 'loading painting detail page...';
+            // Get data from rijksmuseum
+            collection.search(artistName).then(function(artist){
+                document.querySelector('#artist-section').innerHTML = '';
+
+                let sectionTemplate = document.querySelector('#painting-detail').innerHTML;
+                let template = Handlebars.compile(sectionTemplate);
+
+                let painting = artist.getPaintingById(id)[0];
+                console.log(painting);
 
                 var data = template({
-                    artist: artist
+                    artist: artist,
+                    painting: painting
                 });
                 document.querySelector('#artist-section').innerHTML += data;
 
@@ -32,13 +54,17 @@ import Collection from './rijksmuseum/Collection.class.js';
         }
     };
     // Dynamic route to look up paintings by any artist
-    routie('artist/:name', function(name) {
-        sections.toggle(name);
+    routie('artist/:name', function(artistName) {
+        page.artistOverview(artistName);
+    });
+
+    routie('artist/:name/painting/:id', function(artistName, paintingId) {
+        page.paintingDetail(artistName, paintingId);
     });
 
     // Dynamic route to look up paintings by any artist
     routie('', function() {
-        sections.toggle('Rembrandt');
+        page.artistOverview('Rembrandt');
     });
 
     // APp initialiser object instance
