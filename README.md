@@ -1,5 +1,10 @@
 # Web app from scratch - assignments
 
+## Documentatie van de app
+De documentatie van de applicatie is op de volgende pagina te vinden:
+
+<https://github.com/baskager/wafs/tree/master/app>
+
 ## Notice
 CSS to the rescue had wat meer tijd dan verwacht dus ik ben wat vertraagd met dit vak
 
